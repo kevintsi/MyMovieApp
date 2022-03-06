@@ -5,7 +5,13 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>Films</Text>
+      <Text>Popular</Text>
+      {/** Liste film populaire*/}
+      <Text>Top rated</Text>
+      {/** Liste film mieux notés*/}
+      <Text>Must watch</Text>
+      {/** Liste film a regarder*/}
       <StatusBar style="auto" />
     </View>
   );
