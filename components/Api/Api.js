@@ -35,5 +35,16 @@ export const api_call = {
             console.log(`CALL API : Error occured when getting detail movie with id : ${id}`)
             console.log(`${error}`)
         }
+    },
+
+    getMovieImage: async (src) => {
+        try {
+            let res = await fetch(`https://image.tmdb.org/t/p/w500/${src}`)
+            console.log(res)
+            return true
+        } catch (error) {
+            console.log(`CALL API : Error occured when getting movie image with : ${src}`)
+            console.log(`${error}`)
+        }
     }
 }
