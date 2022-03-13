@@ -17,9 +17,10 @@ const MovieList = ({ movies, titleCategory }) => {
     //console.log(`Movies : ${movies} and title : ${titleCategory} ${new Date().toISOString()}`)
     return (
         <SafeAreaView style={styles.container}>
-            <Text>{titleCategory}</Text>
-            <Button title='Voir plus' onPress={() => navigation.navigate('Movies', { category: titleCategory })} />
+            <Text style={styles.textList}>{titleCategory}</Text>
+            <Text style={styles.buttonList} onPress={() => navigation.navigate('Movies', { category: titleCategory })}> Voir plus ..</Text>
             <FlatList
+                style={styles.list}
                 data={movies}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
@@ -33,7 +34,23 @@ const MovieList = ({ movies, titleCategory }) => {
 export default MovieList
 
 const styles = StyleSheet.create({
-    container: {
-        height: 100
-    }
+  textList: {
+    position: 'absolute',
+    top: 0,
+    left: 10,
+    fontWeight: "900"
+  },
+  buttonList: {
+    position: 'absolute',
+    top: 0,
+    right: 10,
+    fontWeight: "900"
+  },
+  list: {
+    marginTop: 20
+  },
+  container: {
+    position: 'relative',
+    marginTop: 15
+  }
 })

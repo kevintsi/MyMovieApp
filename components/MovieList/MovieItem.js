@@ -8,11 +8,21 @@ const MovieItem = (movie) => {
 
     return (
         <View>
-            <Text>{base_movie.title}</Text>
+            <Image style={styles.imageItem} source={{ uri: 'https://image.tmdb.org/t/p/w500'+base_movie.poster_path }} />
         </View>
     )
 }
 
 export default MovieItem
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    imageItem: {
+        width: 100,
+        height: 160,
+        margin: 10,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+    }
+})

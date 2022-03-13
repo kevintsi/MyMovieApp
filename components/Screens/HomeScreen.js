@@ -59,7 +59,6 @@ const HomePage = () => {
 
     return (
         <View style={styles.container}>
-            <Text>Films</Text>
             {popularMovies.length != 0 ? <MovieList movies={popularMovies} titleCategory="Populaire" /> : <Text>Pas de films pour cette catégorie</Text>}
             {topRatedMovies.length != 0 ? <MovieList movies={topRatedMovies} titleCategory="Mieux notés" /> : <Text>Pas de films pour cette catégorie</Text>}
             {upcomingMovies.length != 0 ? <MovieList movies={upcomingMovies} titleCategory="Films à venir" /> : <Text>Pas de films à venir</Text>}
