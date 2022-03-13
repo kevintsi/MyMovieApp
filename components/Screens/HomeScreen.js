@@ -8,6 +8,7 @@ const HomePage = () => {
 
     const [popularMovies, setPopularMovies] = useState([])
     const [topRatedMovies, setTopRatedMovies] = useState([])
+    const [upcomingMovies, setTopUpcomingMovies] = useState([])
 
 
     const getPopularMovies = async () => {
@@ -32,6 +33,18 @@ const HomePage = () => {
 
     }
 
+
+    const getUpcomingMovies = async () => {
+        try {
+            let res = await api_call.getUpcomingMoviesAPI()
+            setTopUpcomingMovies(res.results.slice(0, 5))
+        } catch (error) {
+            console.log(`Error occured when getting top rated movies`)
+            console.log(`${error}`)
+        }
+
+    }
+
     useEffect(() => {
         getPopularMovies()
     }, [])
@@ -40,11 +53,16 @@ const HomePage = () => {
         getTopsRatedMovies()
     }, [])
 
+    useEffect(() => {
+        getUpcomingMovies()
+    }, [])
+
     return (
         <View style={styles.container}>
             <Text>Films</Text>
             {popularMovies.length != 0 ? <MovieList movies={popularMovies} titleCategory="Populaire" /> : <Text>Pas de films pour cette catégorie</Text>}
             {topRatedMovies.length != 0 ? <MovieList movies={topRatedMovies} titleCategory="Mieux notés" /> : <Text>Pas de films pour cette catégorie</Text>}
+            {upcomingMovies.length != 0 ? <MovieList movies={upcomingMovies} titleCategory="Films à venir" /> : <Text>Pas de films à venir</Text>}
         </View>
     )
 }

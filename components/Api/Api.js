@@ -17,7 +17,7 @@ export const api_call = {
             console.log(`${error}`)
         }
     },
-    searchMovie: async (title) => {
+    searchMovieAPI: async (title) => {
         try {
             let res = await fetch(`${process.env.BASE_API}/search/movie?api_key=${process.env.TMDB_API_KEY}&language=fr&query=${title}`)
             return res.json()
@@ -27,7 +27,7 @@ export const api_call = {
         }
     },
 
-    getMovie: async (id) => {
+    getMovieAPI: async (id) => {
         try {
             let res = await fetch(`${process.env.BASE_API}/movie/${id}?api_key=${process.env.TMDB_API_KEY}&language=fr`)
             return res.json()
@@ -37,13 +37,12 @@ export const api_call = {
         }
     },
 
-    getMovieImage: async (src) => {
+    getUpcomingMoviesAPI: async (page = 1) => {
         try {
-            let res = await fetch(`https://image.tmdb.org/t/p/w500/${src}`)
-            console.log(res)
-            return true
+            let res = await fetch(`${process.env.BASE_API}/movie/upcoming?api_key=${process.env.TMDB_API_KEY}&language=fr&page=${page}`)
+            return res.json()
         } catch (error) {
-            console.log(`CALL API : Error occured when getting movie image with : ${src}`)
+            console.log(`CALL API : Error occured when getting upcoming movies`)
             console.log(`${error}`)
         }
     }

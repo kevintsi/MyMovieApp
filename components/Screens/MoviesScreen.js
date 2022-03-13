@@ -10,6 +10,7 @@ const MoviesScreen = ({ route }) => {
     const [page, setPage] = useState(1)
     const [popularMovies, setPopularMovies] = useState([])
     const [topRatedMovies, setTopRatedMovies] = useState([])
+    const [upcomingMovies, setTopUpcomingMovies] = useState([])
 
     console.log("Category " + category)
 
@@ -35,10 +36,22 @@ const MoviesScreen = ({ route }) => {
 
     }
 
+    const getUpcomingMovies = async () => {
+        try {
+            let res = await api_call.getUpcomingMoviesAPI()
+            setTopUpcomingMovies(res.results.slice(0, 5))
+        } catch (error) {
+            console.log(`Error occured when getting top rated movies`)
+            console.log(`${error}`)
+        }
+
+    }
+
     useEffect(() => {
         switch (category) {
             case "Mieux notés": getTopsRatedMovies()
             case "Populaire": getPopularMovies()
+            case "Film à venir": getUpcomingMovies()
         }
     }, [])
 
