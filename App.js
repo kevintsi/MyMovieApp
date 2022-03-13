@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useState, useEffect } from 'react'
 import MovieList from "./components/MovieList/MovieList"
-import { api_call } from './components/api/api';
+import { api_call } from './components/Api/Api';
 
 export default function App() {
 
@@ -13,7 +13,8 @@ export default function App() {
   const getPopularMovies = async () => {
     try {
       let res = await api_call.getPopularMoviesAPI()
-      setPopularMovies(res.results)
+      //console.log(`Result call api getPopularMovies : ${res.results.slice(0, 5)}`)
+      setPopularMovies(res.results.slice(0, 5))
     } catch (error) {
       console.log(`Error occured when getting popular movies`)
       console.log(`${error}`)
@@ -23,7 +24,7 @@ export default function App() {
   const getTopsRatedMovies = async () => {
     try {
       let res = await api_call.getTopsRatedMoviesAPI()
-      setTopRatedMovies(res.results)
+      setTopRatedMovies(res.results.slice(0, 5))
     } catch (error) {
       console.log(`Error occured when getting top rated movies`)
       console.log(`${error}`)
