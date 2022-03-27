@@ -1,6 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { StyleSheet, Text, FlatList, } from 'react-native'
+import React, { useEffect, useState, useLayoutEffect } from 'react'
 import { api_call } from '../Api/Api';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native'
+import MovieItemCategory from '../MovieList/MovieItemCategory';
 
 const MoviesScreen = ({ route }) => {
 
@@ -8,17 +11,25 @@ const MoviesScreen = ({ route }) => {
     const { category } = route.params;
 
     const [page, setPage] = useState(1)
-    const [popularMovies, setPopularMovies] = useState([])
-    const [topRatedMovies, setTopRatedMovies] = useState([])
-    const [upcomingMovies, setTopUpcomingMovies] = useState([])
+    const [movies, setMovies] = useState([])
 
-    console.log("Category " + category)
+    const navigation = useNavigation();
+
+    const renderItem = (movie) => (
+        <MovieItemCategory movie={movie} />
+    )
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: category
+        })
+    }, [])
 
     const getPopularMovies = async () => {
         try {
             let res = await api_call.getPopularMoviesAPI(page)
             //console.log(`Result call api getPopularMovies : ${res.results.slice(0, 5)}`)
-            setPopularMovies(res.results.slice(0, 5))
+            setMovies(movies => [...movies, ...res.results])
         } catch (error) {
             console.log(`Error occured when getting popular movies`)
             console.log(`${error}`)
@@ -28,7 +39,7 @@ const MoviesScreen = ({ route }) => {
     const getTopsRatedMovies = async () => {
         try {
             let res = await api_call.getTopsRatedMoviesAPI(page)
-            setTopRatedMovies(res.results.slice(0, 5))
+            setMovies(movies => [...movies, ...res.results])
         } catch (error) {
             console.log(`Error occured when getting top rated movies`)
             console.log(`${error}`)
@@ -38,8 +49,8 @@ const MoviesScreen = ({ route }) => {
 
     const getUpcomingMovies = async () => {
         try {
-            let res = await api_call.getUpcomingMoviesAPI()
-            setTopUpcomingMovies(res.results.slice(0, 5))
+            let res = await api_call.getUpcomingMoviesAPI(page)
+            setMovies(movies => [...movies, ...res.results])
         } catch (error) {
             console.log(`Error occured when getting top rated movies`)
             console.log(`${error}`)
@@ -49,16 +60,38 @@ const MoviesScreen = ({ route }) => {
 
     useEffect(() => {
         switch (category) {
-            case "Mieux notés": getTopsRatedMovies()
-            case "Populaire": getPopularMovies()
-            case "Film à venir": getUpcomingMovies()
+            case "Mieux notés": {
+                getTopsRatedMovies()
+                break;
+            }
+            case "Populaire": {
+                getPopularMovies()
+                break;
+            }
+            case "Films à venir": {
+                getUpcomingMovies()
+                break;
+            }
         }
-    }, [])
+    }, [page])
+
+    const fetchMoreData = () => {
+        setPage(page + 1)
+        console.log(`Page updated : ${page}`)
+    }
 
     return (
-        <View>
-            <Text>MoviesScreen</Text>
-        </View>
+        <SafeAreaView style={styles.container}>
+            <FlatList
+                style={styles.list}
+                data={movies}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+                onEndReachedThreshold={0.2}
+                onEndReached={fetchMoreData}
+                horizontal={false}
+            />
+        </SafeAreaView>
     )
 }
 
