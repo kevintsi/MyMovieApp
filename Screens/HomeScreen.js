@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native'
 import React from 'react'
 import { useState, useEffect } from 'react'
-import MovieList from "../MovieList/MovieList"
+import MovieList from "./components/MovieList/MovieList"
 import { api_call } from '../Api/Api';
 
 const HomePage = () => {

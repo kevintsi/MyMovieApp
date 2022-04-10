@@ -3,7 +3,7 @@ import React, { useEffect, useState, useLayoutEffect } from 'react'
 import { api_call } from '../Api/Api';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native'
-import MovieItemCategory from '../MovieList/MovieItemCategory';
+import MovieItemCategory from './components/MovieList/MovieItemCategory';
 
 const MoviesScreen = ({ route }) => {
 

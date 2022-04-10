@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { api_call } from '../Api/Api';
+import { api_call } from '../../../Api/Api';
 import RatingStars from '../RatingStars/RatingStars';
 
 
