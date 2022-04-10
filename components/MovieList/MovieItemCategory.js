@@ -1,23 +1,48 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { api_call } from '../Api/Api';
 import StarRating from 'react-native-star-rating';
 
 
 const MovieItemCategory = (movie) => {
     let base_movie = movie.movie.item
+    console.log(base_movie.original_title)
+    const [genres, setGenre] = useState([])
+
+    const getMovieDetail = async () => {
+        try {
+            setGenre([])
+            let res = await api_call.getMovieDetailAPI(base_movie.id)
+            res.genres.map((genre) => {
+                setGenre(genres => [...genres, genre.name])
+            })
+        } catch (error) {
+            console.log(`Error occured when getting popular movies`)
+            console.log(`${error}`)
+        }
+    }
+
+    useEffect(() => {
+        getMovieDetail()
+    }, [])
 
     return (
         <View style={styles.container}>
             <Image style={styles.imageItem} source={{ uri: 'https://image.tmdb.org/t/p/w500' + base_movie.poster_path }} />
-            <View style={styles.detail}>
-                <Text style={{ "fontWeight": "500" }}>{base_movie.title}</Text>
-                <StarRating
-                    disabled={true}
-                    maxStars={5}
-                    rating={base_movie.vote_average / 2}
-                    starSize={20}
-                    fullStarColor={'gold'}
-                />
+            <View style={styles.detailContainer}>
+                <View>
+                    <Text style={{ "fontWeight": "500" }}>{base_movie.title}</Text>
+                    <View style={styles.starRating}>
+                        <StarRating
+                            disabled={true}
+                            maxStars={5}
+                            rating={base_movie.vote_average / 2}
+                            starSize={20}
+                            fullStarColor={'gold'}
+                        />
+                    </View>
+                    <Text style={{ "fontSize": 10 }}>{genres.toString()}</Text>
+                </View>
             </View>
         </View>
     )
@@ -30,10 +55,15 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
     },
-    detail: {
+    starRating: {
         flex: 1,
         flexDirection: "column",
-        width: 100
+        width: "30%"
+
+    },
+    detailContainer: {
+        width: "100%",
+        paddingTop: 10
     },
     imageItem: {
         width: 100,

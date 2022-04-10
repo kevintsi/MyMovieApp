@@ -1,4 +1,4 @@
-import { StyleSheet, Text, FlatList, } from 'react-native'
+import { StyleSheet, FlatList, ActivityIndicator, View } from 'react-native'
 import React, { useEffect, useState, useLayoutEffect } from 'react'
 import { api_call } from '../Api/Api';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,6 +12,7 @@ const MoviesScreen = ({ route }) => {
 
     const [page, setPage] = useState(1)
     const [movies, setMovies] = useState([])
+    const [loading, setLoading] = useState(false)
 
     const navigation = useNavigation();
 
@@ -59,6 +60,7 @@ const MoviesScreen = ({ route }) => {
     }
 
     useEffect(() => {
+        setLoading(true)
         switch (category) {
             case "Mieux notés": {
                 getTopsRatedMovies()
@@ -73,6 +75,8 @@ const MoviesScreen = ({ route }) => {
                 break;
             }
         }
+
+        setLoading(false)
     }, [page])
 
     const fetchMoreData = () => {
@@ -80,8 +84,10 @@ const MoviesScreen = ({ route }) => {
         console.log(`Page updated : ${page}`)
     }
 
-    return (
-        <SafeAreaView style={styles.container}>
+    return loading ?
+        <View style={{ "backgroundColor": "white", "height": "100%", "flex": 1, "justifyContent": 'center' }}><ActivityIndicator color='red' size="large" /></View>
+        :
+        <SafeAreaView>
             <FlatList
                 style={styles.list}
                 data={movies}
@@ -92,9 +98,9 @@ const MoviesScreen = ({ route }) => {
                 horizontal={false}
             />
         </SafeAreaView>
-    )
 }
 
 export default MoviesScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+})
