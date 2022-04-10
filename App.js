@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import HomePage from './components/Screens/HomeScreen';
 import MoviesScreen from './components/Screens/MoviesScreen';
 import { NavigationContainer } from '@react-navigation/native';
@@ -21,7 +21,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-container: {
+  container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
