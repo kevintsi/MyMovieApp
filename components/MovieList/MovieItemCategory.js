@@ -2,11 +2,12 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { api_call } from '../Api/Api';
 import StarRating from 'react-native-star-rating';
+import RatingStars from '../RatingStars/RatingStars';
 
 
-const MovieItemCategory = (movie) => {
-    let base_movie = movie.movie.item
-    console.log(base_movie.original_title)
+const MovieItemCategory = ({ movie }) => {
+    let base_movie = movie.item
+    console.log(base_movie.vote_average)
     const [genres, setGenre] = useState([])
 
     const getMovieDetail = async () => {
@@ -33,12 +34,8 @@ const MovieItemCategory = (movie) => {
                 <View>
                     <Text style={{ "fontWeight": "500" }}>{base_movie.title}</Text>
                     <View style={styles.starRating}>
-                        <StarRating
-                            disabled={true}
-                            maxStars={5}
-                            rating={base_movie.vote_average / 2}
-                            starSize={20}
-                            fullStarColor={'gold'}
+                        <RatingStars
+                            note={base_movie.vote_average / 2}
                         />
                     </View>
                     <Text style={{ "fontSize": 10 }}>{genres.toString()}</Text>
@@ -59,7 +56,6 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "column",
         width: "30%"
-
     },
     detailContainer: {
         width: "100%",
