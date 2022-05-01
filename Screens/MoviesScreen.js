@@ -87,7 +87,7 @@ const MoviesScreen = ({ route }) => {
     return loading ?
         <View style={{ "backgroundColor": "white", "height": "100%", "flex": 1, "justifyContent": 'center' }}><ActivityIndicator color='red' size="large" /></View>
         :
-        <SafeAreaView>
+        <SafeAreaView style={styles.container}>
             <FlatList
                 style={styles.list}
                 data={movies}
@@ -103,4 +103,7 @@ const MoviesScreen = ({ route }) => {
 export default MoviesScreen
 
 const styles = StyleSheet.create({
+    container: {
+        "backgroundColor": "white"
+    }
 })

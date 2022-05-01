@@ -1,13 +1,15 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { api_call } from '../../../Api/Api';
 import RatingStars from '../RatingStars/RatingStars';
+import { useNavigation } from '@react-navigation/native';
 
 
 const MovieItemCategory = ({ movie }) => {
     let base_movie = movie.item
-    console.log(base_movie.vote_average)
+
     const [genres, setGenre] = useState([])
+    const navigation = useNavigation()
 
     const getMovieDetail = async () => {
         try {
@@ -28,7 +30,9 @@ const MovieItemCategory = ({ movie }) => {
 
     return (
         <View style={styles.container}>
-            <Image style={styles.imageItem} source={{ uri: 'https://image.tmdb.org/t/p/w500' + base_movie.poster_path }} />
+            <TouchableOpacity onPress={() => navigation.navigate("MovieDetail", { id: base_movie.id })}>
+                <Image style={styles.imageItem} source={{ uri: 'https://image.tmdb.org/t/p/w500' + base_movie.poster_path }} />
+            </TouchableOpacity>
             <View style={styles.detailContainer}>
                 <View>
                     <Text style={{ "fontWeight": "500" }}>{base_movie.title}</Text>
