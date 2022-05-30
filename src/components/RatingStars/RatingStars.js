@@ -14,7 +14,6 @@ const RatingStars = ({ note }) => {
                 })
             }
             {
-
                 Array.from({ length: TOTAL_STARS - Math.round(note) }, (x, i) => {
                     return (
                         <MaterialIcons key={i} name="star-border" size={20} color="#FFA000" />

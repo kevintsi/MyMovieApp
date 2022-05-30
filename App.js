@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import HomePage from './Screens/HomeScreen';
-import MoviesScreen from './Screens/MoviesScreen';
+import HomePage from './src/screens/HomeScreen';
+import MoviesScreen from './src/screens/MoviesScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import MovieDetailScreen from './Screens/components/MovieDetailScreen';
+import MovieDetailScreen from './src/screens/MovieDetailScreen';
 
 
 export default function App() {

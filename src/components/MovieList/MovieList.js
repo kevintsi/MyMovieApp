@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
   },
   container: {
     position: 'relative',
-    marginTop: 15
+    marginTop: 15,
+    height: "30%"
   }
 })

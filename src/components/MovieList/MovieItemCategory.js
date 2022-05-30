@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { api_call } from '../../../Api/Api';
+import { api_call } from '../../api/api';
 import RatingStars from '../RatingStars/RatingStars';
 import { useNavigation } from '@react-navigation/native';
 
@@ -10,6 +10,7 @@ const MovieItemCategory = ({ movie }) => {
 
     const [genres, setGenre] = useState([])
     const navigation = useNavigation()
+
 
     const getMovieDetail = async () => {
         try {

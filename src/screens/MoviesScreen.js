@@ -1,9 +1,9 @@
 import { StyleSheet, FlatList, ActivityIndicator, View } from 'react-native'
 import React, { useEffect, useState, useLayoutEffect } from 'react'
-import { api_call } from '../Api/Api';
+import { api_call } from '../api/api';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native'
-import MovieItemCategory from './components/MovieList/MovieItemCategory';
+import MovieItemCategory from '../components/MovieList/MovieItemCategory';
 
 const MoviesScreen = ({ route }) => {
 
