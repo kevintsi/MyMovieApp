@@ -5,6 +5,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native'
 import MovieItemCategory from '../components/MovieList/MovieItemCategory';
 
+
+import LottieView from 'lottie-react-native';
+
+
 const MoviesScreen = ({ route }) => {
 
 
@@ -12,7 +16,7 @@ const MoviesScreen = ({ route }) => {
 
     const [page, setPage] = useState(1)
     const [movies, setMovies] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     const navigation = useNavigation();
 
@@ -28,9 +32,11 @@ const MoviesScreen = ({ route }) => {
 
     const getPopularMovies = async () => {
         try {
+            setLoading(true)
             let res = await api_call.getPopularMoviesAPI(page)
             //console.log(`Result call api getPopularMovies : ${res.results.slice(0, 5)}`)
             setMovies(movies => [...movies, ...res.results])
+            setLoading(false)
         } catch (error) {
             console.log(`Error occured when getting popular movies`)
             console.log(`${error}`)
@@ -39,8 +45,11 @@ const MoviesScreen = ({ route }) => {
 
     const getTopsRatedMovies = async () => {
         try {
+
+            setLoading(true)
             let res = await api_call.getTopsRatedMoviesAPI(page)
             setMovies(movies => [...movies, ...res.results])
+            setLoading(false)
         } catch (error) {
             console.log(`Error occured when getting top rated movies`)
             console.log(`${error}`)
@@ -50,8 +59,10 @@ const MoviesScreen = ({ route }) => {
 
     const getUpcomingMovies = async () => {
         try {
+            setLoading(true)
             let res = await api_call.getUpcomingMoviesAPI(page)
             setMovies(movies => [...movies, ...res.results])
+            setLoading(false)
         } catch (error) {
             console.log(`Error occured when getting top rated movies`)
             console.log(`${error}`)
@@ -60,7 +71,6 @@ const MoviesScreen = ({ route }) => {
     }
 
     useEffect(() => {
-        setLoading(true)
         switch (category) {
             case "Mieux notés": {
                 getTopsRatedMovies()
@@ -75,8 +85,6 @@ const MoviesScreen = ({ route }) => {
                 break;
             }
         }
-
-        setLoading(false)
     }, [page])
 
     const fetchMoreData = () => {
@@ -85,7 +93,7 @@ const MoviesScreen = ({ route }) => {
     }
 
     return loading ?
-        <View style={{ "backgroundColor": "white", "height": "100%", "flex": 1, "justifyContent": 'center' }}><ActivityIndicator color='red' size="large" /></View>
+        <LottieView source={require("../assets/images/108069-yellow-loader.json")} autoPlay loop />
         :
         <SafeAreaView style={styles.container}>
             <FlatList

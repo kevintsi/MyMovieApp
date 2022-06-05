@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 
 const MovieBackdrop = ({ backdrop, children }) => {
-    console.log(`Link image : ${backdrop}`)
     return (
         <View style={{ display: "flex", flexDirection: "column", height: 400, backgroundColor: "black" }}>
             <Image style={styles.imageItem} source={{ uri: 'https://image.tmdb.org/t/p/original' + backdrop }} />

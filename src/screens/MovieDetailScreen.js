@@ -3,11 +3,15 @@ import { useRoute } from "@react-navigation/native"
 import { api_call } from '../api/api';
 import { useNavigation } from '@react-navigation/native'
 import React, { useState, useEffect, useLayoutEffect } from 'react'
+
+
 import MovieBackdrop from '../components/MovieDetail/MovieBackdrop';
 import MovieTitle from '../components/MovieDetail/MovieTitle';
 import MovieRating from '../components/MovieDetail/MovieRating';
 import MovieOverview from '../components/MovieDetail/MovieOverview';
 import MovieGenre from '../components/MovieDetail/MovieGenre';
+
+import LottieView from 'lottie-react-native';
 
 const MovieDetailScreen = () => {
 
@@ -72,7 +76,7 @@ const MovieDetailScreen = () => {
     }
 
     return (
-        loading ? (<Text>Loading...</Text>) :
+        loading ? (<LottieView source={require("../assets/images/108069-yellow-loader.json")} autoPlay loop />) :
             (<View style={styles.container}>
                 <ScrollView style={styles.scrollview} contentContainerStyle={{ flexGrow: 1 }} bounces={false}>
                     {movieInfoGeneral()}
