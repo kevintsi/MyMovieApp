@@ -59,7 +59,7 @@ export const api_call = {
 
     getMovieCreditsAPI: async (movie_id) => {
         try {
-            let res = await fetch(`${process.env.REACT_APP_BASE_API}/movie/${movie_id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=fr`)
+            let res = await fetch(`${process.env.REACT_APP_BASE_API}/movie/${movie_id}/credits?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=fr`)
             return res.json()
         } catch (error) {
             console.log(`CALL API : Error occured when getting movie detail`)

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import { StyleSheet, View, ScrollView } from 'react-native'
 import { useRoute } from "@react-navigation/native"
 import { api_call } from '../api/api';
 import { useNavigation } from '@react-navigation/native'
@@ -10,6 +10,7 @@ import MovieTitle from '../components/MovieDetail/MovieTitle';
 import MovieRating from '../components/MovieDetail/MovieRating';
 import MovieOverview from '../components/MovieDetail/MovieOverview';
 import MovieGenre from '../components/MovieDetail/MovieGenre';
+import MovieCast from '../components/MovieDetail/MovieCast';
 
 import LottieView from 'lottie-react-native';
 
@@ -69,6 +70,7 @@ const MovieDetailScreen = () => {
                     <View>
                         <MovieGenre genres={movieDetail.genres} />
                         <MovieOverview overview={movieDetail.overview} />
+                        <MovieCast movie_id={id} />
                     </View>
                 )}
             </View>

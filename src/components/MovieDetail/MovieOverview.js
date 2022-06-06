@@ -8,7 +8,7 @@ const MovieOverview = ({ overview }) => {
     const ReadMore = ({ children }) => {
 
         return (
-            <View>
+            <View >
                 {isReadMore ? <Text>{overview.slice(0, 150)}</Text> : <Text>{children}</Text>}
                 <Text onPress={() => setisReadMore(!isReadMore)}>
                     {isReadMore ? "...lire plus" : " lire moins"}
@@ -18,7 +18,7 @@ const MovieOverview = ({ overview }) => {
     }
 
     return (
-        <View>
+        <View style={styles.container}>
             <Text style={{ fontWeight: "bold" }}>Résumé</Text>
             <ReadMore>
                 {overview}
@@ -29,4 +29,8 @@ const MovieOverview = ({ overview }) => {
 
 export default MovieOverview
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        padding: 10
+    }
+})
