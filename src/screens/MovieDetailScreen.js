@@ -11,12 +11,15 @@ import MovieRating from '../components/MovieDetail/MovieRating';
 import MovieOverview from '../components/MovieDetail/MovieOverview';
 import MovieGenre from '../components/MovieDetail/MovieGenre';
 import MovieCast from '../components/MovieDetail/MovieCast';
+import MovieImages from '../components/MovieDetail/MovieImages';
 
 import LottieView from 'lottie-react-native';
 
 const MovieDetailScreen = () => {
 
-    const [loading, setLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
+    const [images, setImages] = useState([])
+    const [casts, setCasts] = useState([])
     const [movieDetail, setMovieDetail] = useState({})
 
 
@@ -33,32 +36,62 @@ const MovieDetailScreen = () => {
 
     const getMovieDetail = async () => {
         try {
+            setIsLoading(true)
             console.log("API call getmoviedetail")
             let res = await api_call.getMovieDetailAPI(id)
             setMovieDetail(res)
-            setLoading(false)
             console.log("End API call getmoviedetail")
         } catch (error) {
-            console.log(`Error occured when getting popular movies`)
+            console.log(`Error occured when getting movie's detail`)
             console.log(`${error}`)
+            setIsLoading(false)
+        }
+    }
+
+    const getImages = async () => {
+        try {
+            let res = await api_call.getImagesAPI(id)
+            setImages(res.backdrops)
+            setIsLoading(false)
+        } catch (error) {
+            console.log(`Error occured when getting movie's images`)
+            console.log(`${error}`)
+            setIsLoading(false)
+        }
+    }
+
+    const getCasts = async () => {
+        try {
+            let res = await api_call.getMovieCreditsAPI(id)
+            setCasts(res.cast.slice(0, 10))
+        } catch (error) {
+            console.log(`Error occured when getting movie's cats`)
+            console.log(`${error}`)
+            setIsLoading(false)
         }
     }
 
     useEffect(() => {
         console.log("Before getting movie details")
         getMovieDetail()
+        getCasts()
+        getImages()
         console.log("After getting movie details")
-    }, [])
+
+        return () => {
+            setMovieDetail({})
+            setImages({})
+            setCasts([])
+        }
+    }, [id])
 
     const movieInfoGeneral = () => {
         return (
             <MovieBackdrop backdrop={movieDetail.backdrop_path}>
-                {!loading && (
-                    <View style={styles.movieTitleContainer}>
-                        <MovieTitle title={movieDetail.title} />
-                        <MovieRating vote_average={movieDetail.vote_average} />
-                    </View>
-                )}
+                <View style={styles.movieTitleContainer}>
+                    <MovieTitle title={movieDetail.title} />
+                    <MovieRating vote_average={movieDetail.vote_average} />
+                </View>
             </MovieBackdrop>
         )
     }
@@ -66,19 +99,18 @@ const MovieDetailScreen = () => {
     const movieInfoDetail = () => {
         return (
             <View style={{ display: "flex", flexDirection: "column" }}>
-                {!loading && (
-                    <View>
-                        <MovieGenre genres={movieDetail.genres} />
-                        <MovieOverview overview={movieDetail.overview} />
-                        <MovieCast movie_id={id} />
-                    </View>
-                )}
+                <View>
+                    <MovieGenre genres={movieDetail.genres} />
+                    <MovieOverview overview={movieDetail.overview} />
+                    <MovieCast casts={casts} />
+                    <MovieImages images={images} />
+                </View>
             </View>
         )
     }
 
     return (
-        loading ? (<LottieView source={require("../assets/images/108069-yellow-loader.json")} autoPlay loop />) :
+        isLoading ? (<LottieView source={require("../assets/images/108069-yellow-loader.json")} autoPlay loop />) :
             (<View style={styles.container}>
                 <ScrollView style={styles.scrollview} contentContainerStyle={{ flexGrow: 1 }} bounces={false}>
                     {movieInfoGeneral()}

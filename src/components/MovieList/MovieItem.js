@@ -2,8 +2,8 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-const MovieItem = (movie) => {
-    let base_movie = movie.movie.item
+const MovieItem = ({ movie }) => {
+    let base_movie = movie.item
     const navigation = useNavigation()
     // console.log(`Movie : ${JSON.stringify(base_movie)}`)
     // console.log("Movie contents ", base_movie.title)
