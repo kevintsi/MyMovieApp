@@ -17,7 +17,6 @@ const HomePage = () => {
 
     const getPopularMovies = async () => {
         try {
-            setLoading(true)
             let res = await api_call.getPopularMoviesAPI()
             //console.log(`Result call api getPopularMovies : ${res.results.slice(0, 5)}`)
             setPopularMovies(res.results.slice(0, 5))
@@ -30,7 +29,6 @@ const HomePage = () => {
 
     const getTopsRatedMovies = async () => {
         try {
-            setLoading(true)
             let res = await api_call.getTopsRatedMoviesAPI()
             setTopRatedMovies(res.results.slice(0, 5))
             setLoading(false)
@@ -44,7 +42,6 @@ const HomePage = () => {
 
     const getUpcomingMovies = async () => {
         try {
-            setLoading(true)
             let res = await api_call.getUpcomingMoviesAPI()
             setTopUpcomingMovies(res.results.slice(0, 5))
             setLoading(false)
@@ -61,6 +58,11 @@ const HomePage = () => {
         getTopsRatedMovies()
         getUpcomingMovies()
         console.log("End getting all movies")
+        return () => {
+            setPopularMovies([])
+            setTopRatedMovies([])
+            setTopUpcomingMovies([])
+        }
     }, [])
 
     return loading ?

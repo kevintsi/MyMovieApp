@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, ActivityIndicator, View } from 'react-native'
+import { StyleSheet, FlatList, Text, View } from 'react-native'
 import React, { useEffect, useState, useLayoutEffect } from 'react'
 import { api_call } from '../api/api';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -11,7 +11,6 @@ import LottieView from 'lottie-react-native';
 
 const MoviesScreen = ({ route }) => {
 
-
     const { category } = route.params;
 
     const [page, setPage] = useState(1)
@@ -20,9 +19,10 @@ const MoviesScreen = ({ route }) => {
 
     const navigation = useNavigation();
 
-    const renderItem = (movie) => (
-        <MovieItemCategory movie={movie} />
-    )
+    const renderItem = (movie) => {
+        return <MovieItemCategory movie={movie} />
+    }
+
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -32,10 +32,9 @@ const MoviesScreen = ({ route }) => {
 
     const getPopularMovies = async () => {
         try {
-            setLoading(true)
             let res = await api_call.getPopularMoviesAPI(page)
             //console.log(`Result call api getPopularMovies : ${res.results.slice(0, 5)}`)
-            setMovies(movies => [...movies, ...res.results])
+            setMovies([...movies, ...res.results])
             setLoading(false)
         } catch (error) {
             console.log(`Error occured when getting popular movies`)
@@ -45,10 +44,8 @@ const MoviesScreen = ({ route }) => {
 
     const getTopsRatedMovies = async () => {
         try {
-
-            setLoading(true)
             let res = await api_call.getTopsRatedMoviesAPI(page)
-            setMovies(movies => [...movies, ...res.results])
+            setMovies([...movies, ...res.results])
             setLoading(false)
         } catch (error) {
             console.log(`Error occured when getting top rated movies`)
@@ -59,12 +56,11 @@ const MoviesScreen = ({ route }) => {
 
     const getUpcomingMovies = async () => {
         try {
-            setLoading(true)
             let res = await api_call.getUpcomingMoviesAPI(page)
-            setMovies(movies => [...movies, ...res.results])
+            setMovies([...movies, ...res.results])
             setLoading(false)
         } catch (error) {
-            console.log(`Error occured when getting top rated movies`)
+            console.log(`Error occured when getting upcoming movies`)
             console.log(`${error}`)
         }
 
@@ -85,12 +81,24 @@ const MoviesScreen = ({ route }) => {
                 break;
             }
         }
+
     }, [page])
 
     const fetchMoreData = () => {
         setPage(page + 1)
         console.log(`Page updated : ${page}`)
     }
+
+    const renderLoader = (
+        <View style={{
+            height: 100,
+            width: "100%",
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}>
+            <LottieView source={require("../assets/images/108069-yellow-loader.json")} autoPlay loop />
+        </View>
+    )
 
     return loading ?
         <LottieView source={require("../assets/images/108069-yellow-loader.json")} autoPlay loop />
@@ -100,9 +108,10 @@ const MoviesScreen = ({ route }) => {
                 style={styles.list}
                 data={movies}
                 renderItem={renderItem}
-                keyExtractor={item => item.id}
-                onEndReachedThreshold={0.2}
+                keyExtractor={(item, index) => index}
+                onEndReachedThreshold={0.3}
                 onEndReached={fetchMoreData}
+                ListFooterComponent={renderLoader}
                 horizontal={false}
             />
         </SafeAreaView>

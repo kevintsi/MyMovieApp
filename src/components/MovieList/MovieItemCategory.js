@@ -14,7 +14,6 @@ const MovieItemCategory = ({ movie }) => {
 
     const getMovieDetail = async () => {
         try {
-            setGenre([])
             let res = await api_call.getMovieDetailAPI(base_movie.id)
             res.genres.map((genre) => {
                 setGenre(genres => [...genres, genre.name])
@@ -27,6 +26,9 @@ const MovieItemCategory = ({ movie }) => {
 
     useEffect(() => {
         getMovieDetail()
+        return () => {
+            setGenre([])
+        }
     }, [])
 
     return (
