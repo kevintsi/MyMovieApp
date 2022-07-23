@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     rateContainer: {
         display: 'flex',
         flexDirection: "row",
-        width: 130,
+        width: 150,
         marginTop: 10
     },
 })
