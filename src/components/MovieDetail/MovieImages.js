@@ -1,5 +1,7 @@
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
 import React from 'react'
+
+
 const MovieImages = ({ images }) => {
 
     const renderItem = (image) => {

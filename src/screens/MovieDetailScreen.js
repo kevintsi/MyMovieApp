@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView } from 'react-native'
+import { StyleSheet, View, ScrollView, Modal, Text } from 'react-native'
 import { useRoute } from "@react-navigation/native"
 import { api_call } from '../api/api';
 import { useNavigation } from '@react-navigation/native'
@@ -26,8 +26,6 @@ const MovieDetailScreen = () => {
     const { id } = useRoute().params
     const navigation = useNavigation();
 
-    console.log(`Id movie : ${id}`)
-
     useLayoutEffect(() => {
         navigation.setOptions({
             title: movieDetail.title
@@ -40,7 +38,10 @@ const MovieDetailScreen = () => {
             console.log("API call getmoviedetail")
             let res = await api_call.getMovieDetailAPI(id)
             setMovieDetail(res)
+            getImages()
+            getCasts()
             console.log("End API call getmoviedetail")
+            setIsLoading(false)
         } catch (error) {
             console.log(`Error occured when getting movie's detail`)
             console.log(`${error}`)
@@ -51,8 +52,7 @@ const MovieDetailScreen = () => {
     const getImages = async () => {
         try {
             let res = await api_call.getImagesAPI(id)
-            setImages(res.backdrops)
-            setIsLoading(false)
+            setImages(res.backdrops.slice(0, 10))
         } catch (error) {
             console.log(`Error occured when getting movie's images`)
             console.log(`${error}`)
@@ -72,11 +72,9 @@ const MovieDetailScreen = () => {
     }
 
     useEffect(() => {
-        console.log("Before getting movie details")
+        console.log("Before getting movie " + id + " details")
         getMovieDetail()
-        getCasts()
-        getImages()
-        console.log("After getting movie details")
+        console.log("After getting movie " + id + " details")
 
         return () => {
             setMovieDetail({})

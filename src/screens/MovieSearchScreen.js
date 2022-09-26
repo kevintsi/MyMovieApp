@@ -4,22 +4,19 @@ import { api_call } from '../api/api'
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MovieItemCategory from '../components/MovieList/MovieItemCategory';
+import { useNavigation } from '@react-navigation/native';
 
 const MovieSearchScreen = () => {
 
     const [movieName, setMovieName] = useState("")
     const [movies, setMovies] = useState([])
-    const [loadig, setLoading] = useState(false)
-    const [page, setPage] = useState(1)
 
     const renderItem = (movie) => {
         return <MovieItemCategory movie={movie} />
     }
 
     const searchMovie = () => {
-        if (movieName.length != 0) {
-            getMovie()
-        }
+        getMovie()
     }
 
     const getMovie = async () => {
@@ -35,7 +32,7 @@ const MovieSearchScreen = () => {
     }
 
     return (
-        <View>
+        <View style={styles.container}>
             <Text>Rechercher un film</Text>
             <TextInput placeholder='Entrez le nom du film que vous cherchez' onChange={searchMovie} onChangeText={(text) => setMovieName(text)} />
             {movies.length != 0 ?
@@ -44,18 +41,21 @@ const MovieSearchScreen = () => {
                         style={styles.list}
                         data={movies}
                         renderItem={renderItem}
-                        keyExtractor={(item, index) => index}
+                        keyExtractor={(item, index) => item.id}
                         onEndReachedThreshold={0.3}
                         horizontal={false}
                     />
                 </SafeAreaView> : null
-
             }
-
         </View>
     )
 }
 
 export default MovieSearchScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: "white",
+        height: "100%"
+    }
+})

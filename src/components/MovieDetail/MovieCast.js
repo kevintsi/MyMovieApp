@@ -34,10 +34,14 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         paddingRight: 10,
+        height: 200,
+        width: 100
     },
     castPhoto: {
         height: 100,
-        borderRadius: 10
+        borderRadius: 10,
+        maxWidth: "100%",
+        maxHeight: "100%"
     },
     castTitle: {
         fontWeight: "bold",

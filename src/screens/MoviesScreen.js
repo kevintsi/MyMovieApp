@@ -108,7 +108,7 @@ const MoviesScreen = ({ route }) => {
                 style={styles.list}
                 data={movies}
                 renderItem={renderItem}
-                keyExtractor={(item, index) => index}
+                keyExtractor={(item, index) => item.id}
                 onEndReachedThreshold={0.3}
                 onEndReached={fetchMoreData}
                 ListFooterComponent={renderLoader}
