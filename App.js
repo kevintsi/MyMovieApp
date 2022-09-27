@@ -30,6 +30,12 @@ export default function App() {
         <Stack.Screen
           name="Movies"
           component={MoviesScreen}
+          options={({ navigation }) => ({
+            title: 'Accueil',
+            headerRight: () => (
+              <MaterialIcon name='search' size={30} onPress={() => navigation.navigate("MovieSearch")} />
+            )
+          })}
         />
         <Stack.Screen
           name="MovieDetail"

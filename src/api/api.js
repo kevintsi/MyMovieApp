@@ -10,7 +10,7 @@ export const api_call = {
     },
     getPopularMoviesAPI: async (page = 1) => {
         try {
-            let res = await fetch(`${process.env.REACT_APP_BASE_API}/movie/popular?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=fr&page=${page}`)
+            let res = await fetch(`${process.env.REACT_APP_BASE_API}/movie/popular?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=fr&page=${page}&region=fr`)
             return res.json()
         } catch (error) {
             console.log(`CALL API : Error occured when getting top rated movies`)
@@ -39,7 +39,7 @@ export const api_call = {
 
     getUpcomingMoviesAPI: async (page = 1) => {
         try {
-            let res = await fetch(`${process.env.REACT_APP_BASE_API}/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=fr&page=${page}`)
+            let res = await fetch(`${process.env.REACT_APP_BASE_API}/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=fr&page=${page}&region=fr`)
             return res.json()
         } catch (error) {
             console.log(`CALL API : Error occured when getting upcoming movies`)

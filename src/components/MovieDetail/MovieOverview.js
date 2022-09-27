@@ -8,9 +8,9 @@ const MovieOverview = ({ overview }) => {
     const ReadMore = ({ children }) => {
 
         return (
-            <View >
-                {isReadMore ? <Text>{overview.slice(0, 150)}</Text> : <Text>{children}</Text>}
-                <Text onPress={() => setisReadMore(!isReadMore)}>
+            <View style={{ paddingTop: 10 }}>
+                {isReadMore ? <Text style={{ textAlign: "justify" }}>{overview.slice(0, 150)}</Text> : <Text style={{ textAlign: "justify" }}>{children}</Text>}
+                <Text style={{ fontWeight: "bold" }} onPress={() => setisReadMore(!isReadMore)}>
                     {isReadMore ? "...lire plus" : " lire moins"}
                 </Text>
             </View>
