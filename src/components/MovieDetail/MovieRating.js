@@ -6,7 +6,7 @@ const MovieRating = ({ vote_average }) => {
     return (
         <View style={styles.rateContainer}>
             <RatingStars
-                note={vote_average / 2}
+                note={Math.round(vote_average / 2)}
             />
             <Text style={{ color: "white" }}>{vote_average / 2}</Text>
         </View>

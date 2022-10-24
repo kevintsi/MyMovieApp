@@ -22,8 +22,10 @@ export default function App() {
           component={HomePage}
           options={({ navigation }) => ({
             title: 'Accueil',
+            headerStyle: styles.header,
+            headerTintColor: "white",
             headerRight: () => (
-              <MaterialIcon name='search' size={30} onPress={() => navigation.navigate("MovieSearch")} />
+              <MaterialIcon name='search' color="white" size={30} onPress={() => navigation.navigate("MovieSearch")} />
             )
           })}
         />
@@ -32,20 +34,28 @@ export default function App() {
           component={MoviesScreen}
           options={({ navigation }) => ({
             title: 'Accueil',
+            headerStyle: styles.header,
+            headerTintColor: "white",
             headerRight: () => (
-              <MaterialIcon name='search' size={30} onPress={() => navigation.navigate("MovieSearch")} />
+              <MaterialIcon name='search' color="white" size={30} onPress={() => navigation.navigate("MovieSearch")} />
             )
           })}
         />
         <Stack.Screen
           name="MovieDetail"
           component={MovieDetailScreen}
+          options={{
+            headerStyle: styles.header,
+            headerTintColor: "white",
+          }}
         />
         <Stack.Screen
           name="MovieSearch"
           component={MovieSearchScreen}
           options={{
-            title: "Cherche film"
+            title: "Cherche film",
+            headerStyle: styles.header,
+            headerTintColor: "white",
           }}
         />
       </Stack.Navigator>
@@ -60,4 +70,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  header: {
+    backgroundColor: "#E43A45",
+  }
 });

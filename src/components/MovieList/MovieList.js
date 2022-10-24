@@ -1,4 +1,4 @@
-import { StyleSheet, Text, SafeAreaView, FlatList } from 'react-native'
+import { StyleSheet, Text, SafeAreaView, FlatList, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import MovieItem from './MovieItem'
 import { useNavigation } from '@react-navigation/native'
@@ -15,8 +15,12 @@ const MovieList = ({ movies, titleCategory }) => {
   //console.log(`Movies : ${movies} and title : ${titleCategory} ${new Date().toISOString()}`)
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.textList}>{titleCategory}</Text>
-      <Text style={styles.buttonList} onPress={() => navigation.navigate('Movies', { category: titleCategory })}> Voir plus ..</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.textList}>{titleCategory}</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Movies', { category: titleCategory })}>
+          <Text style={styles.buttonList}>Voir plus</Text>
+        </TouchableOpacity>
+      </View>
       <FlatList
         style={styles.list}
         data={movies}
@@ -33,19 +37,24 @@ export default MovieList
 
 const styles = StyleSheet.create({
   textList: {
-    position: 'absolute',
-    top: 0,
-    left: 10,
-    fontWeight: "900"
+    fontWeight: "bold",
+    marginLeft: 10,
   },
   buttonList: {
-    position: 'absolute',
-    top: 0,
-    right: 10,
-    fontWeight: "900"
+    textAlign: "center",
+    width: 80,
+    borderRadius: 100,
+    color: "white",
+    backgroundColor: "#E43A45",
+    marginRight: 5
+  },
+  titleContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
   list: {
-    marginTop: 20
+    marginTop: 10
   },
   container: {
     position: 'relative',

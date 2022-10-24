@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native'
+import { FlatList, StyleSheet, Text, TextInput, View, StatusBar } from 'react-native'
 import React, { useState } from 'react'
 import { api_call } from '../api/api'
 
@@ -30,8 +30,20 @@ const MovieSearchScreen = () => {
         }
     }
 
+    const renderEmpty = (
+        <View style={{
+            height: 100,
+            width: "100%",
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}>
+            <Text>Pas de films</Text>
+        </View>
+    )
+
     return (
         <View style={styles.container}>
+            <StatusBar barStyle="light-content" backgroundColor="#E43A45" />
             <View style={styles.headerContainer}>
                 <Text>Rechercher un film</Text>
                 <TextInput
@@ -46,9 +58,10 @@ const MovieSearchScreen = () => {
                     style={styles.list}
                     data={movies}
                     renderItem={renderItem}
-                    keyExtractor={(item, index) => item.id}
+                    keyExtractor={(item) => item.id}
                     onEndReachedThreshold={0.3}
                     horizontal={false}
+                    ListEmptyComponent={renderEmpty}
                 />
             </SafeAreaView>
         </View>

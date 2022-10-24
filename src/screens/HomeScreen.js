@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import React from 'react'
 import { useState, useEffect } from 'react'
 import MovieList from "../components/MovieList/MovieList"
@@ -6,6 +6,7 @@ import { api_call } from '../api/api';
 
 
 import LottieView from 'lottie-react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const HomePage = () => {
 
@@ -13,6 +14,8 @@ const HomePage = () => {
     const [topRatedMovies, setTopRatedMovies] = useState([])
     const [upcomingMovies, setTopUpcomingMovies] = useState([])
     const [loading, setLoading] = useState(true)
+
+    const navigation = useNavigation()
 
 
     const getPopularMovies = async () => {
@@ -63,12 +66,13 @@ const HomePage = () => {
             setTopRatedMovies([])
             setTopUpcomingMovies([])
         }
-    }, [])
+    }, [navigation])
 
     return loading ?
         <LottieView source={require("../assets/images/108069-yellow-loader.json")} autoPlay loop />
         :
         <View style={styles.container}>
+            <StatusBar barStyle="light-content" backgroundColor="#E43A45" />
             {popularMovies.length != 0 ? <MovieList movies={popularMovies} titleCategory="Populaire" /> : <Text>Pas de films pour cette catégorie</Text>}
             {topRatedMovies.length != 0 ? <MovieList movies={topRatedMovies} titleCategory="Mieux notés" /> : <Text>Pas de films pour cette catégorie</Text>}
             {upcomingMovies.length != 0 ? <MovieList movies={upcomingMovies} titleCategory="Films à venir" /> : <Text>Pas de films à venir</Text>}

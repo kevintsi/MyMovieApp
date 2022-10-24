@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, Text, View } from 'react-native'
+import { StyleSheet, FlatList, StatusBar, View, Text } from 'react-native'
 import React, { useEffect, useState, useLayoutEffect } from 'react'
 import { api_call } from '../api/api';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -81,6 +81,10 @@ const MoviesScreen = ({ route }) => {
                 break;
             }
         }
+        return () => {
+            setMovies([])
+            setPage(0)
+        }
 
     }, [page])
 
@@ -100,18 +104,31 @@ const MoviesScreen = ({ route }) => {
         </View>
     )
 
+    const renderEmpty = (
+        <View style={{
+            height: 100,
+            width: "100%",
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}>
+            <Text>Plus de films à charger</Text>
+        </View>
+    )
+
     return loading ?
         <LottieView source={require("../assets/images/108069-yellow-loader.json")} autoPlay loop />
         :
         <SafeAreaView style={styles.container}>
+            <StatusBar barStyle="light-content" backgroundColor="#E43A45" />
             <FlatList
                 style={styles.list}
                 data={movies}
                 renderItem={renderItem}
-                keyExtractor={(item, index) => item.id}
+                keyExtractor={(item) => item.id}
                 onEndReachedThreshold={0.3}
                 onEndReached={fetchMoreData}
                 ListFooterComponent={renderLoader}
+                ListEmptyComponent={renderEmpty}
                 horizontal={false}
             />
         </SafeAreaView>

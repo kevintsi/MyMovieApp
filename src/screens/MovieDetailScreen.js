@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView, Modal, Text } from 'react-native'
+import { StyleSheet, View, ScrollView, StatusBar } from 'react-native'
 import { useRoute } from "@react-navigation/native"
 import { api_call } from '../api/api';
 import { useNavigation } from '@react-navigation/native'
@@ -110,6 +110,7 @@ const MovieDetailScreen = () => {
     return (
         isLoading ? (<LottieView source={require("../assets/images/108069-yellow-loader.json")} autoPlay loop />) :
             (<View style={styles.container}>
+                <StatusBar barStyle="light-content" backgroundColor="#E43A45" />
                 <ScrollView style={styles.scrollview} contentContainerStyle={{ flexGrow: 1 }} bounces={false}>
                     {movieInfoGeneral()}
                     {movieInfoDetail()}
