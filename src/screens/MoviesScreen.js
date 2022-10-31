@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import MovieItemCategory from '../components/MovieList/MovieItemCategory';
 
 
+
 import LottieView from 'lottie-react-native';
 
 

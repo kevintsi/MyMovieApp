@@ -45,7 +45,6 @@ const MovieSearchScreen = () => {
         <View style={styles.container}>
             <StatusBar barStyle="light-content" backgroundColor="#E43A45" />
             <View style={styles.headerContainer}>
-                <Text>Rechercher un film</Text>
                 <TextInput
                     style={styles.textInput}
                     placeholder='Entrez le nom du film que vous cherchez'
@@ -81,9 +80,10 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start"
     },
     textInput: {
-        borderWidth: 1,
+        borderWidth: 0.5,
+        borderRadius: 10,
         padding: 5,
-        margin: 5
+        margin: 20
     }
 
 })
