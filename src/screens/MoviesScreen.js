@@ -82,11 +82,6 @@ const MoviesScreen = ({ route }) => {
                 break;
             }
         }
-        return () => {
-            setMovies([])
-            setPage(0)
-        }
-
     }, [page])
 
     const fetchMoreData = () => {
