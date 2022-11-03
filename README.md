@@ -12,18 +12,18 @@ Mini-Projet d'une application en React-Native utilisant l'API de TheMovieDB et E
 
 ### L'accueil
 
-<img src="asset/images/accueil.png">
+<img src="asset/images/accueil.png" width="200">
 
 ### Detail d'un film
 
-<img src="asset/images/detail_part1.png">
+<img src="asset/images/detail_part1.png" width="200">
 
-<img src="asset/images/detail_part2.png">
+<img src="asset/images/detail_part2.png" width="200">
 
 ### Recherche d'un film
 
-<img src="asset/images/search.png">
+<img src="asset/images/search.png" width="200">
 
 ### Liste des films populaires/mieux notés/à venir
 
-<img src="asset/images/list_movies.png">
+<img src="asset/images/list_movies.png" width="200">
