@@ -5,7 +5,15 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e692742d-720b-4dcc-8df4-efbd4adb0f6f"
+      }
+    },
+    "android": {
+      "package": "com.kevintsi.mymovieapp"
+    }
   },
   "name": "my-movie-app"
 }

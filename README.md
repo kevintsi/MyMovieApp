@@ -8,6 +8,19 @@ Mini-Projet d'une application en React-Native utilisant l'API de TheMovieDB et E
 - Visualiser les détails d'un film (résumé, images, notes, acteurs principaux)
 - Recherche d'un film en particulier
 
+## Comment lancer l'application
+
+Pour lancer l'application, après avoir cloner le dépot, il faut entrer ces lignes :
+
+```bash
+    npm i
+```
+Cette ligne servira à créer le dossier node_modules contenant les modules nécessaires pour le lancement de l'application
+
+```bash
+    $ npm run start
+```
+
 ## Le front de l'application
 
 ### L'accueil
