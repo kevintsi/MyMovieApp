@@ -20,6 +20,7 @@ Cette ligne servira à créer le dossier node_modules contenant les modules néc
 ```bash
     $ npm run start
 ```
+Celle-là pour lancer l'application
 
 ## Le front de l'application
 
