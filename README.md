@@ -10,7 +10,16 @@ Mini-Projet d'une application en React-Native utilisant l'API de TheMovieDB et E
 
 ## Comment lancer l'application
 
-Pour lancer l'application, après avoir cloner le dépot, il faut entrer ces lignes :
+Tout d'abord vous aurez besoin de créer un compte sur le site de <a href="https://www.themoviedb.org/">TheMovieDB</a> afin de récupérer la variable d'environnement suivante :
+
+```bash
+
+REACT_APP_TMDB_API_KEY = # la clé d'API disponible après la création du compte sur le site
+REACT_APP_BASE_API = # https://api.themoviedb.org/3
+
+```
+
+Ensuite il faut entrer ces lignes :
 
 ```bash
     npm i
